@@ -1,0 +1,3 @@
+# Notes
+
+An MCP server is a program that exposes a set of capabilities (tools) over the Model Context Protocol, so any MCP client, such as an AI agent, can discover and call them in a standard way. A tool is a plain Python function registered on the server; its name, type hints and docstring become the tool's name, input schema and description, which is how a client knows what it does and what to send. From the Clinic Queries diagram I built the three MCP servers (Booking, Pharmacy, Medical Reports) with their six tools, plus a small async client that stands in for the agents' MCP clients. I skipped the agents themselves, the UI, API gateway, auth, Temporal, Redis, Postgres, Qdrant and monitoring, and kept all data in memory, so it resets whenever a server restarts.
