@@ -1,0 +1,54 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Booking server (8001)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/mcp_servers/booking_server.py",
+            "cwd": "${workspaceFolder}/mcp_servers",
+            "python": "${workspaceFolder}/mcp_servers/.venv/Scripts/python.exe",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Pharmacy server (8002)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/mcp_servers/pharmacy_server.py",
+            "cwd": "${workspaceFolder}/mcp_servers",
+            "python": "${workspaceFolder}/mcp_servers/.venv/Scripts/python.exe",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Reports server (8003)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/mcp_servers/reports_server.py",
+            "cwd": "${workspaceFolder}/mcp_servers",
+            "python": "${workspaceFolder}/mcp_servers/.venv/Scripts/python.exe",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Clinic client",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/mcp_servers/clinic_client.py",
+            "cwd": "${workspaceFolder}/mcp_servers",
+            "python": "${workspaceFolder}/mcp_servers/.venv/Scripts/python.exe",
+            "console": "integratedTerminal",
+            "preLaunchTask": "Wait for clinic servers"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Clinic: all servers + client",
+            "configurations": [
+                "Booking server (8001)",
+                "Pharmacy server (8002)",
+                "Reports server (8003)",
+                "Clinic client"
+            ],
+            "stopAll": true
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Wait for clinic servers",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "foreach ($port in 8001, 8002, 8003) { while (-not (Test-NetConnection 127.0.0.1 -Port $port -InformationLevel Quiet -WarningAction SilentlyContinue)) { Start-Sleep -Milliseconds 500 } }; Write-Host 'All clinic servers are up'"
+            ],
+            "presentation": { "reveal": "silent" }
+        }
+    ]
+}
