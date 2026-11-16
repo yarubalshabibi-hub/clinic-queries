@@ -50,11 +50,17 @@ async def main() -> None:
         ("get_patient_medical_records", {"patient_id": 99}),
     ]
 
-    all_lines = await asyncio.gather(
-        run_server_calls("booking", BOOKING_URL, booking_calls),
-        run_server_calls("pharmacy", PHARMACY_URL, pharmacy_calls),
-        run_server_calls("reports", REPORTS_URL, reports_calls),
-    )
+    try:
+        all_lines = await asyncio.gather(
+            run_server_calls("booking", BOOKING_URL, booking_calls),
+            run_server_calls("pharmacy", PHARMACY_URL, pharmacy_calls),
+            run_server_calls("reports", REPORTS_URL, reports_calls),
+        )
+    except RuntimeError as error:
+        print(f"Could not reach a clinic server: {error}")
+        print("Start booking_server.py, pharmacy_server.py and reports_server.py first, then run this client.")
+        return
+
     for server_lines in all_lines:
         for line in server_lines:
             print(line)
